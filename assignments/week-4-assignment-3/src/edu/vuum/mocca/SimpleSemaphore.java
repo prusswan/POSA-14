@@ -46,14 +46,11 @@ public class SimpleSemaphore {
     public void acquire() throws InterruptedException {
         // TODO - you fill in here.
         lock.lockInterruptibly();
-        try {
-            while (mCount == 0) {
-                noPermits.await();
-            }
-            mCount--;
-        } finally {
-            lock.unlock();
+        while (mCount == 0) {
+            noPermits.await();
         }
+        mCount--;
+        lock.unlock();
     }
 
     /**
@@ -63,14 +60,11 @@ public class SimpleSemaphore {
     public void acquireUninterruptibly() {
         // TODO - you fill in here.
         lock.lock();
-        try {
-            while (mCount == 0) {
-                noPermits.awaitUninterruptibly();
-            }
-            mCount--;
-        } finally {
-            lock.unlock();
+        while (mCount == 0) {
+            noPermits.awaitUninterruptibly();
         }
+        mCount--;
+        lock.unlock();
     }
 
     /**
@@ -79,12 +73,9 @@ public class SimpleSemaphore {
     void release() {
         // TODO - you fill in here.
         lock.lock();
-        try {
-            mCount++;
-            noPermits.signal();
-        } finally {
-            lock.unlock();
-        }
+        mCount++;
+        noPermits.signal();
+        lock.unlock();
     }
 
     /**
