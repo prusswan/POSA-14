@@ -97,8 +97,9 @@ public class ThreadPoolDownloadService extends Service {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				DownloadUtils.downloadFile(getBaseContext(), intent.getData());
+				String pathname = DownloadUtils.downloadFile(getBaseContext(), intent.getData());
+				Messenger messenger = (Messenger) intent.getParcelableExtra(DownloadUtils.MESSENGER_KEY);
+				DownloadUtils.sendPath(pathname, messenger);
 			}
         	
         };

@@ -86,6 +86,8 @@ public class DownloadIntentService extends IntentService {
         // method from the DownloadUtils class that downloads the uri
         // in the intent and returns the file's pathname using a
         // Messenger who's Bundle key is defined by DownloadUtils.MESSENGER_KEY
-    	DownloadUtils.downloadFile(this, intent.getData());
+    	String pathname = DownloadUtils.downloadFile(this, intent.getData());
+		Messenger messenger = (Messenger) intent.getParcelableExtra(DownloadUtils.MESSENGER_KEY);
+		DownloadUtils.sendPath(pathname, messenger);
     }
 }
