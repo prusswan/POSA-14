@@ -21,7 +21,7 @@ public class StorageUtilities {
 	public static final String LOG_TAG = StorageUtilities.class.getCanonicalName();
 	
 	// Constant that denote whether a file should be stored publicly or privately
-	public static final int SECURITY_PUBLIC = 0; // Line 24
+	public static final int SECURITY_PUBLIC = 0; // Line 24 vulnerability
 	public static final int SECURITY_PRIVATE = 1;
 	
 	// Constant that denotes what media type a file should be stored as.
@@ -73,7 +73,7 @@ public class StorageUtilities {
 			storageDir = context.getFilesDir();
 		}
 		// Otherwise, store the file in a public directory depending on its media type.
-		else {	// Line 76
+		else {	// Line 76 vulnerability
 			switch (type) {
 				case MEDIA_TYPE_IMAGE:
 					storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);

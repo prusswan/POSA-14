@@ -45,7 +45,7 @@ public class LoginActivity extends StoryActivityBase{
 	 * Get the file used for storing login credentials
 	 */
 	public static File getLoginFile (Context context) {
-		return StorageUtilities.getOutputMediaFile(context, 	// Line 48
+		return StorageUtilities.getOutputMediaFile(context, 	// Line 48 vulnerability
 				StorageUtilities.MEDIA_TYPE_TEXT, 
 				MAX_SECURITY, 
 				"login.txt");

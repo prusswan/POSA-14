@@ -53,7 +53,7 @@
         <activity
             android:name="edu.vuum.mocca.ui.SoundRecordActivity"
             android:label="@string/title_activity_sound_record">
-            <intent-filter> 										<!-- Line 56 -->
+            <intent-filter> 										<!-- Line 56 vulnerability -->
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
             </intent-filter>
         </activity>
