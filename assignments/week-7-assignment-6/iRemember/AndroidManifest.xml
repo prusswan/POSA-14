@@ -52,9 +52,15 @@
         <!-- THIS IS THE SOUND RECORD ACTIVITY -->
         <activity
             android:name="edu.vuum.mocca.ui.SoundRecordActivity"
-            android:label="@string/title_activity_sound_record">
+            android:label="@string/title_activity_sound_record"
+            android:exported="false">
+             <!-- Explicitly set the value of android:exported for each component in your manifest. 
+             This eliminates the risk of having a component exported inadvertently if it declares an intent filter. 
+             
+             Also, see: http://stackoverflow.com/questions/13892721/activity-exported-false-listed-in-activity-chooser
+             --> 
             <intent-filter> 										<!-- Line 56 vulnerability -->
-                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <!-- action android:name="android.intent.action.TIMEZONE_CHANGED" / -->
             </intent-filter>
         </activity>
         
