@@ -19,14 +19,14 @@ import android.view.View;
  * The AIDL interface object that's returned can then be used to interact with
  * the Service either synchronously or asynchronously, depending on the type of
  * AIDL interface requested.
- * 
+ *
  * Starting Bound Services to run synchronously in background Threads from the
  * asynchronous UI Thread is an example of the Half-Sync/Half-Async Pattern.
  * Starting Bound Services using Intents is an example of the Activator and
  * Command Processor patterns. The DownloadActivity plays the role of the
  * Creator and creates a Command in the form of an Intent. The Intent is
  * received by the Service process, which plays the role of the Executor.
- * 
+ *
  * The use of AIDL interfaces to pass information between two different
  * processes is an example of the Broker Pattern, in which all
  * communication-related functionality is encapsulated in the AIDL interface and
@@ -124,7 +124,7 @@ public class DownloadActivity extends DownloadBase {
      * The implementation of the DownloadCallback AIDL Interface. Should be
      * passed to the DownloadBoundServiceAsync Service using the
      * DownloadRequest.downloadImage() method.
-     * 
+     *
      * This implementation of DownloadCallback.Stub plays the role of Invoker in
      * the Broker Pattern.
      */
@@ -149,16 +149,18 @@ public class DownloadActivity extends DownloadBase {
                     displayBitmap(imagePathname);
                 }
             };
+            runOnUiThread(displayRunnable);
             }
+
         };
 
     /**
      * This method is called when a user presses a button (see
      * res/layout/activity_download.xml)
-     * 
+     *
      * @throws RemoteException
      */
-    public void runService(View view) throws RemoteException {
+    public void runService(View view) {
         Uri uri = Uri.parse(getUrlString());
 
         hideKeyboard();
@@ -167,15 +169,25 @@ public class DownloadActivity extends DownloadBase {
         case R.id.bound_sync_button:
             // TODO - You fill in here to use mDownloadCall to
             // download the image & then display it.
-            String pathname = mDownloadCall.downloadImage(uri);
-            displayBitmap(pathname);
+            String pathname;
+            try {
+                pathname = mDownloadCall.downloadImage(uri);
+                displayBitmap(pathname);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
             break;
 
         case R.id.bound_async_button:
             // TODO - You fill in here to call downloadImage() on
             // mDownloadRequest, passing in the appropriate Uri and
             // callback.
-            mDownloadRequest.downloadImage(uri, mDownloadCallback);
+            try {
+                mDownloadRequest.downloadImage(uri, mDownloadCallback);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
             break;
         }
     }
