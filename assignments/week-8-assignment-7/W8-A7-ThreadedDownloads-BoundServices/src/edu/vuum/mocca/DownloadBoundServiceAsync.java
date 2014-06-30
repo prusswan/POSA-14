@@ -32,25 +32,25 @@ public class DownloadBoundServiceAsync extends Service{
      * This implementation plays the role of Invoker in the Broker Pattern.
      */
     DownloadRequest.Stub mDownloadRequestImpl = new DownloadRequest.Stub() {
-            /**
+        /** 
          * Download the image at the given Uri and return a pathname to the file
          * on the Android file system by calling the sendPath() method on the
          * provided callback
          * 
          * Use the methods defined in DownloadUtils for code brevity.
          */
-            @Override
-            public void downloadImage(Uri uri,
-                                      DownloadCallback callback)
-                throws RemoteException {
-                // TODO You fill in here to download the file using
-                // the appropriate helper method in DownloadUtils and
-                // then send the pathname back to the client via the
-                // callback object.
+        @Override
+        public void downloadImage(Uri uri,
+                                  DownloadCallback callback)
+            throws RemoteException {
+            // TODO You fill in here to download the file using
+            // the appropriate helper method in DownloadUtils and
+            // then send the pathname back to the client via the
+            // callback object.
             String pathname = DownloadUtils.downloadFile(
                 DownloadBoundServiceAsync.this, uri);
             callback.sendPath(pathname);
-            }
+        }
 
     };
 

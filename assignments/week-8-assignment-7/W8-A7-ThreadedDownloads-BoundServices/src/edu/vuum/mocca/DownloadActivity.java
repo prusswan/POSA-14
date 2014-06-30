@@ -60,65 +60,65 @@ public class DownloadActivity extends DownloadBase {
      * DownloadServiceSync Service using bindService().
      */
     ServiceConnection mServiceConnectionSync = new ServiceConnection() {
-            /**
-             * Cast the returned IBinder object to the DownloadCall
-             * AIDL Interface and store it for later use in
-             * mDownloadCall.
-             */
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d(TAG, "ComponentName: " + name);
-                // TODO You fill in here to replace null with a call
-                // to a generated stub method that converts the
-                // service parameter into an interface that can be
-                // used to make RPC calls to the Service.
+        /**
+         * Cast the returned IBinder object to the DownloadCall
+         * AIDL Interface and store it for later use in
+         * mDownloadCall.
+         */
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+        	Log.d(TAG, "ComponentName: " + name);
+            // TODO You fill in here to replace null with a call
+            // to a generated stub method that converts the
+            // service parameter into an interface that can be
+            // used to make RPC calls to the Service.
 
-            mDownloadCall = DownloadCall.Stub.asInterface(service);
-            }
+        	mDownloadCall = DownloadCall.Stub.asInterface(service);
+        }
 
-            /**
-             * Called if the remote service crashes and is no longer
-             * available.  The ServiceConnection will remain bound,
-             * but the service will not respond to any requests.
-             */
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                mDownloadCall = null;
-            }
+        /**
+         * Called if the remote service crashes and is no longer
+         * available.  The ServiceConnection will remain bound,
+         * but the service will not respond to any requests.
+         */
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mDownloadCall = null;
+        }
 
-        };
+    };
 
     /**
      * This ServiceConnection is used to receive results after binding to the
      * DownloadServiceAsync Service using bindService().
      */
     ServiceConnection mServiceConnectionAsync = new ServiceConnection() {
-            /**
-             * Cast the returned IBinder object to the DownloadRequest
-             * AIDL Interface and store it for later use in
-             * mDownloadRequest.
-             */
-            @Override
+        /**
+         * Cast the returned IBinder object to the DownloadRequest
+         * AIDL Interface and store it for later use in
+         * mDownloadRequest.
+         */
+        @Override
         public void onServiceConnected(ComponentName name,
                                                IBinder service) {
-                // TODO You fill in here to replace null with a call
-                // to a generated stub method that converts the
-                // service parameter into an interface that can be
-                // used to make RPC calls to the Service.
+            // TODO You fill in here to replace null with a call
+            // to a generated stub method that converts the
+            // service parameter into an interface that can be
+            // used to make RPC calls to the Service.
 
             mDownloadRequest = DownloadRequest.Stub.asInterface(service);
-            }
+        }
 
-            /**
-             * Called if the remote service crashes and is no longer
-             * available.  The ServiceConnection will remain bound,
-             * but the service will not respond to any requests.
-             */
-            @Override
+        /**
+         * Called if the remote service crashes and is no longer
+         * available.  The ServiceConnection will remain bound,
+         * but the service will not respond to any requests.
+         */
+        @Override
         public void onServiceDisconnected(ComponentName name) {
-                mDownloadRequest = null;
-            }
-        };
+            mDownloadRequest = null;
+        }
+    };
 
     /**
      * The implementation of the DownloadCallback AIDL Interface. Should be
@@ -129,18 +129,18 @@ public class DownloadActivity extends DownloadBase {
      * the Broker Pattern.
      */
     DownloadCallback.Stub mDownloadCallback = new DownloadCallback.Stub() {
-            /**
-             * Called when the DownloadServiceAsync finishes obtaining
-             * the results from the GeoNames Web service.  Use the
-             * provided String to display the results in a TextView.
-             */
-            @Override
-            public void sendPath(final String imagePathname) throws RemoteException {
-                // TODO - You fill in here to replace null with a new
-                // Runnable whose run() method displays the bitmap
-                // image whose pathname is passed as a parameter to
-                // sendPath().  Please use displayBitmap() defined in
-                // DownloadBase.
+        /**
+         * Called when the DownloadServiceAsync finishes obtaining
+         * the results from the GeoNames Web service.  Use the
+         * provided String to display the results in a TextView.
+         */
+        @Override
+        public void sendPath(final String imagePathname) throws RemoteException {
+            // TODO - You fill in here to replace null with a new
+            // Runnable whose run() method displays the bitmap
+            // image whose pathname is passed as a parameter to
+            // sendPath().  Please use displayBitmap() defined in
+            // DownloadBase.
 
             Runnable displayRunnable = new Runnable() {
 
@@ -150,9 +150,9 @@ public class DownloadActivity extends DownloadBase {
                 }
             };
             runOnUiThread(displayRunnable);
-            }
+        }
 
-        };
+    };
 
     /**
      * This method is called when a user presses a button (see
